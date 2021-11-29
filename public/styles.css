@@ -1,0 +1,64 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* color: rgb(92, 55, 55); */
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 20px;
+  align-items: center;
+}
+
+.logo img {
+  display: flex;
+  width: 100px;
+  height: 120px;
+  border-radius: 10px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+}
+
+.nav-links a {
+  font-size: 1rem;
+  /* text-transform: uppercase; */
+  padding: 3rem 1rem;
+  text-decoration: none;
+}
+
+.login {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+}
+
+.login a {
+  font-size: 1rem;
+  /* text-transform: uppercase; */
+  padding: 3rem 1rem;
+  text-decoration: none;
+}
+
+body {
+  /* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("./background.jpg"); */
+  font-family: "Open Sans", sans-serif;
+  /* background-repeat: repeat; */
+  /* background-position: center; */
+  background-size: cover;
+}
