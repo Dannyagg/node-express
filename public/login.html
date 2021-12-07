@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeErpess</title>
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+
+<body>
+
+    <div class="nav-container">
+        <div class="logo">
+            <a href="#">
+                <img src="./logo.jpg" alt="logo">
+            </a>
+        </div>
+        <div>
+
+            <ul class="nav-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./shop.html">Shop</a></li>
+                <li><a href="./about.html">About</a></li>
+            </ul>
+
+        </div>
+
+        <div class="login">
+            <li><a href="./login.html">Login / Signup</a></li>
+        </div>
+
+    </div>
+
+    <!-- Posting without javaScript , regular method -->
+    
+    <!-- <div class="post-form">
+
+        <form action='/login' method='POST'>
+            <label for="name">Enter name:</label>
+            <input type="text" name="name" id="name" autocomplete="false"> -->
+
+            <!-- <label for="person-id">Enter ID:</label>
+            <input type="text" id="user-ID" > -->
+            <!-- <button type="submit" class="submit-btn"> Post </button>
+        </form>
+
+    </div> -->
+    
+
+    
+    <!-- Posting with javaScript -->
+    <div class="post-form">
+        <form>
+            <label for="name">Enter name:</label>
+            <input type="text" name="name" id="name" class="js-form" autocomplete="false">
+            <small class="form-alert"></small>
+            <!-- <label for="person-id">Enter ID:</label>
+            <input type="text" id="user-ID" > -->
+            <button type="submit" class="submit-btn"> Post </button>
+        </form>
+
+    </div>
+
+    <div class="result">
+    
+    </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous"></script>
+<script>
+    const result = document.querySelector('.result')
+
+    const fetchPeople = async () => {
+        try {
+            const { data } = await axios.get('/api/v1/people')
+
+            const people = data.data.map((person) => {
+                return `<h5>${person.name}</h5>`
+            })
+            result.innerHTML = people.join('')
+        } catch (error) {
+            result.innerHTML = `<div class="alert alert-danger">Can't Fetch Data</div>`
+        }
+    }
+    fetchPeople()
+    // submit form
+    const btn = document.querySelector('.submit-btn')
+    const input = document.querySelector('.js-form')
+    const formAlert = document.querySelector('.form-alert')
+    btn.addEventListener('click', async (e) => {
+        e.preventDefault()
+        const nameValue = input.value
+
+        try {
+            const { data } = await axios.post('/api/v1/people', { name: nameValue })
+            const h5 = document.createElement('h5')
+            h5.textContent = data.person
+            result.appendChild(h5)
+        } catch (error) {
+            // console.log(error.response)
+            formAlert.textContent = error.response.data.msg
+        }
+        input.value = ''
+    })
+</script>
+
+</body>
+
+</html>
