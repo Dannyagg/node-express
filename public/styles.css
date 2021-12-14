@@ -13,14 +13,12 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 200px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 20px;
   margin-bottom: 10px;
-  /* padding-bottom: 200px; */
   align-items: center;
   border-bottom: 1px solid brown;
 }
@@ -38,13 +36,14 @@
 .nav-links {
   list-style-type: none;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   font-weight: bold;
 }
 
 .nav-links a {
   font-size: 1rem;
-  /* text-transform: uppercase; */
+  flex-wrap: wrap;
   padding: 3rem 1rem;
   text-decoration: none;
   color: white;
@@ -60,7 +59,6 @@
 
 .login a {
   font-size: 1rem;
-  /* text-transform: uppercase; */
   padding: 3rem 1rem;
   text-decoration: none;
   color: white;
@@ -77,14 +75,13 @@ body {
 
 .post-form {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 5px;
-  height: 200px;
-  width: 700px;
   margin: auto;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   background-color: rgb(51, 41, 22);
   border-radius: 10px;
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
@@ -95,6 +92,7 @@ body {
 form {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   /* border: 1px solid brown; */
   color: white;
@@ -114,8 +112,12 @@ form label {
 }
 
 .result {
-   height: 170px;
-   width: 800px;
-   margin: auto;
-   border: 1px solid brown;
+  display: flex;
+  padding: 5px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(80, 38, 11);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }

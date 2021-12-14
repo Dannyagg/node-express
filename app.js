@@ -11,7 +11,7 @@ const path = require('path')
 const app = express()
 // const morgan = require('morgan')
 const { products } = require('./data')
-const { people } = require('./data')
+let { people } = require('./data')
 
 // middleware 
 // const logger = require('./logger')
@@ -29,7 +29,7 @@ const { people } = require('./data')
 app.use(express.static(path.join(__dirname, './public')))
 
 // parse json data to data.js from form input
-app.use (express.json())
+app.use(express.json())
 // get all people from people database api
 
 // app.get('/api/v1/people', (req, res) => {
@@ -46,13 +46,65 @@ app.use (express.json())
 
 
 app.get('/api/v1/people', (req, res) => {
+
     res.status(200).json({ success: true, data: people })
 })
 
-// posting to people api
+// updating database with PUT method
 
-app.post('/api/v1/people', (req, res)=> {
-res.status(201).send('Success')
+app.put('/api/v1/people/:id', (req, res) => {
+    const { id } = req.params
+    const { name } = req.body
+
+    const person = people.find((person) => person.id === Number(id))
+
+    if (!person) {
+        return res.status(404).json({ success: false, message: `No person with id ${id}` })
+    }
+
+    const newPeople = people.map((person) => {
+        if (person.id === Number(id)) {
+            person.name = name
+        }
+
+        return person
+    })
+    res.status(200).json({ success: true, data: newPeople })
+})
+
+// Delete method 
+
+app.delete('/api/v1/people/:id', (req, res) => {
+
+    const person = people.find((person) => person.id === Number(req.params.id))
+
+    if (!person) {
+        return res.status(404).json({ success: false, message: `Person with id ${req.params.id} does not exist` })
+    }
+
+    // This is the nesw list after the person has been deleted
+    const newPeople = people.filter((person) => person.id !== Number(req.params.id))
+
+    // if the person with the spcified ID was found and deleted successfully, return the new list
+    res.status(200).json({ success: true, data: newPeople })
+})
+
+
+// posting to people api =  POST METHOD
+
+app.post('/api/v1/people', (req, res) => {
+    const { name } = req.body
+    if (!name) {
+        return res.status(400).json({ success: false, message: 'please provide name' })
+    }
+    res.status(201).send({ success: true, person: name })
+})
+app.post('/api/v1/postman/people', (req, res) => {
+    const { name } = req.body
+    if (!name) {
+        return res.status(400).json({ success: false, message: 'please provide name' })
+    }
+    res.status(201).send({ success: true, data: [...people, name] })
 })
 
 
@@ -115,7 +167,7 @@ app.get('/api/v1/query', (req, res) => {
 
     if (sortedProducts.length < 1) {
         // res.status(200).send('No product matched your search');
-        return res.status(200).json({ sucess: true, data: [] })
+        return res.status(200).json({ success: true, data: [] })
     }
 
     res.status(200).json(sortedProducts)
@@ -129,6 +181,6 @@ app.get('/api/v1/query', (req, res) => {
 //     res.status(404).send('<h1> 404 - Resource not found</h1>')
 // })
 
-app.listen(3000, function () {
-    console.log('server is listening on port 3000 ...')
+app.listen(5000, function () {
+    console.log('server is listening on port 5000 ...')
 })
