@@ -79,7 +79,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 5px;
+  padding: 55px;
   margin: auto;
   margin-bottom: 20px;
   background-color: rgb(51, 41, 22);
@@ -106,6 +106,7 @@ form label {
 .submit-btn {
   margin-left: 10px;
   width: 70px;
+
 }
 .submit-btn:hover {
   background-color: rgb(180, 141, 12);
